@@ -6,6 +6,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 // The wonder: a gnat touring the unread landscape of my own fingerprint.
+// Forty years of carrying that landscape, and only a gnat ever bothered to read it.
 const wonderLine =
   "A gnat stood on my thumb and walked the whorl of my fingerprint, and I realised I have carried that tiny landscape for forty years without once reading it.";
 
@@ -17,6 +18,9 @@ function main(): void {
     throw new Error(
       `entry must be between 1 and ${MAX_CHARS} characters, got ${sentence.length}`,
     );
+  }
+  if (sentence.includes("\n")) {
+    throw new Error("entry must be a single sentence on one line");
   }
   const outDir = process.env.OUTPUT_DIR ?? "/output";
   mkdirSync(outDir, { recursive: true });
